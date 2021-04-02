@@ -1,0 +1,9 @@
+[package]
+name = "sort"
+version = "0.1.0"
+authors = ["Dzenan Jupic <56133904+DzenanJupic@users.noreply.github.com>"]
+edition = "2018"
+
+[features]
+counting-sort-16 = []
+counting-sort-32 = []
