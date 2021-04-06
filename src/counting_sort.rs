@@ -3,7 +3,6 @@
 /// (This is an unstable version of Counting-sort)
 pub trait CountingSort {
     fn sort(&mut self);
-    fn sort_stable(&mut self) { todo!(); }
 }
 
 impl CountingSort for [bool] {
@@ -26,7 +25,7 @@ impl CountingSort for [bool] {
 macro_rules! impl_count_sort {
     (impl CountingSort for [$ty:ty] in range $min:expr => $max:expr) => {
         impl CountingSort for [$ty] {
-            #[inline]
+            #[cfg_attr(not(feature = "is_benchmark"), inline)]
             fn sort(&mut self) {
                 const TOTAL: usize = $crate::UsizeConversions::into_usize($min) + $crate::UsizeConversions::into_usize($max); 
                 

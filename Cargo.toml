@@ -4,6 +4,25 @@ version = "0.1.0"
 authors = ["Dzenan Jupic <56133904+DzenanJupic@users.noreply.github.com>"]
 edition = "2018"
 
+[profile.release]
+lto = "fat"
+
+[dev-dependencies]
+concat-idents = "1.1.2"
+criterion = { version = "0.3.4", features = [] }
+rand = "0.8.3"
+seq-macro = "0.2.1"
+
 [features]
+is_benchmark = []
+
 counting-sort-16 = []
 counting-sort-32 = []
+
+[[bench]]
+name = "std_sort"
+harness = false
+
+[[bench]]
+name = "counting_sort"
+harness = false
