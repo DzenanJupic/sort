@@ -7,7 +7,7 @@ mod common;
 
 fn counting_sort<T>(slice: &mut [T])
     where [T]: CountingSort {
-    CountingSort::sort(slice);
+    CountingSort::counting_sort(slice);
 }
 
 criterion_sort_benchmark!(

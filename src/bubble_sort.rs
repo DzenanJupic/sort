@@ -1,10 +1,12 @@
 pub trait BubbleSort {
-    fn sort(&mut self);
+    fn bubble_sort(&mut self);
 }
 
 impl<T> BubbleSort for [T]
     where T: Ord {
-    fn sort(&mut self) {
+    fn bubble_sort(&mut self) {
+        if self.len() < 2 { return; }
+
         loop {
             let mut is_sorted = true;
 
@@ -17,19 +19,5 @@ impl<T> BubbleSort for [T]
 
             if is_sorted { break; }
         }
-    }
-}
-
-impl<T> crate::Sort for T
-    where T: BubbleSort {
-    fn sort(&mut self) {
-        BubbleSort::sort(self);
-    }
-}
-
-unsafe impl<T> crate::SortStable for T
-    where T: BubbleSort {
-    fn sort_stable(&mut self) {
-        BubbleSort::sort(self);
     }
 }
