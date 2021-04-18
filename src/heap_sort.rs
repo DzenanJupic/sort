@@ -9,8 +9,7 @@ impl<T: Ord> HeapSort for [T] {
 }
 
 pub fn heap_sort<T: Ord>(slice: &mut [T]) {
-    if core::mem::size_of::<T>() == 0 { return; }
-    if slice.len() < 2 { return; }
+    should_be_sorted!(slice: [T]);
 
     for unsorted in (0..slice.len()).rev() {
         max_heapify(&mut slice[..=unsorted]);
@@ -19,16 +18,6 @@ pub fn heap_sort<T: Ord>(slice: &mut [T]) {
 }
 
 pub fn max_heapify<T: Ord>(heap: &mut [T]) {
-    match heap.len() {
-        0 | 1 => return,
-        2 if heap[0] > heap[1] => return,
-        2 => {
-            heap.swap(0, 1);
-            return;
-        }
-        _ => {}
-    }
-
     for i in (0..heap.len() / 2).rev() {
         bubble_down(heap, i);
     }
@@ -54,4 +43,12 @@ fn max_element_index<T: Ord>(slice: &[T], left_i: usize, right_i: usize) -> Opti
         .into_iter()
         .chain(right.into_iter())
         .max_by_key(|&(e, _)| e)
+}
+
+#[test]
+fn t() {
+    let s: &mut [_] = &mut [-10, 5, 0, 19, 8, 2, 4, 20, 123, -123];
+    heap_sort(s);
+    dbg!(&s);
+    assert!(s.is_sorted());
 }

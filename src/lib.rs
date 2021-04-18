@@ -5,6 +5,9 @@ pub use crate::usize_conversions::UsizeConversions;
 
 #[doc(hidden)]
 pub mod usize_conversions;
+#[macro_use]
+#[doc(hidden)]
+pub mod intrinsics;
 
 /// The hart piece of `sort`.
 /// 

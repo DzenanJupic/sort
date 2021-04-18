@@ -13,17 +13,7 @@ pub fn qs(slice: &mut [String]) {
 }
 
 pub fn quick_sort<T: Ord>(slice: &mut [T]) {
-    if std::mem::size_of::<T>() == 0 { return; }
-
-    match slice.len() {
-        0 | 1 => return,
-        2 if slice[0] < slice[1] => return,
-        2 => {
-            slice.swap(0, 1);
-            return;
-        }
-        _ => {}
-    }
+    should_be_sorted!(slice: [T]);
 
     let (pivot, rest) = slice
         .split_first_mut()

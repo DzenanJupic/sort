@@ -5,8 +5,7 @@ pub trait InsertionSort {
 impl<T> InsertionSort for [T]
     where T: Ord {
     fn insertion_sort(&mut self) {
-        if std::mem::size_of::<T>() == 0 { return; }
-        if self.len() < 2 { return; }
+        should_be_sorted!(self: [T]);
 
         for next_unsorted in 1..self.len() {
             let inset_index = match self[..next_unsorted].binary_search(&self[next_unsorted]) {
