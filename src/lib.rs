@@ -71,7 +71,7 @@ macro_rules! any_sort {
 any_sort!(
     /*  comparison sorts  */
     BubbleSort::bubble_sort
-    // HeapSort::heap_sort todo
+    HeapSort::heap_sort
     InsertionSort::insertion_sort
     // MergeSort::merge_sort todo
     QuickSort::quick_sort
