@@ -12,14 +12,10 @@ pub fn heap_sort<T: Ord>(slice: &mut [T]) {
     if core::mem::size_of::<T>() == 0 { return; }
     if slice.len() < 2 { return; }
 
-    max_heapify(slice);
-
-    // swap the max element with the last element
-    let last = slice.len() - 1;
-    slice.swap(0, last);
-    // now the last element is the greatest
-    // so we sort the remainng
-    heap_sort(&mut slice[..last])
+    for unsorted in (0..slice.len()).rev() {
+        max_heapify(&mut slice[..=unsorted]);
+        slice.swap(0, unsorted);
+    }
 }
 
 pub fn max_heapify<T: Ord>(heap: &mut [T]) {
@@ -38,22 +34,15 @@ pub fn max_heapify<T: Ord>(heap: &mut [T]) {
     }
 }
 
-pub fn bubble_down<T: Ord>(heap: &mut [T], i: usize) {
+pub fn bubble_down<T: Ord>(heap: &mut [T], mut parent: usize) {
     fn left_child(i: usize) -> usize { 2 * i + 1 }
     fn right_child(i: usize) -> usize { 2 * i + 2 }
 
-    let left_child_i = left_child(i);
-    let right_child_i = right_child(i);
+    while let Some((max_child, max_child_i)) = max_element_index(heap, left_child(parent), right_child(parent)) {
+        if max_child <= &heap[parent] { break; }
 
-    let max_child = max_element_index(heap, left_child_i, right_child_i);
-
-    if let Some((child, ci)) = max_child {
-        let element = &heap[i];
-
-        if child > element {
-            heap.swap(ci, i);
-            bubble_down(heap, ci);
-        }
+        heap.swap(parent, max_child_i);
+        parent = max_child_i;
     }
 }
 
