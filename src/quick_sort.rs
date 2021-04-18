@@ -3,7 +3,7 @@ pub trait QuickSort {
 }
 
 impl<T: Ord> QuickSort for [T] {
-    fn quick_sort(&mut self) {
+    default fn quick_sort(&mut self) {
         quick_sort(self);
     }
 }
@@ -34,15 +34,16 @@ pub fn quick_sort<T: Ord>(slice: &mut [T]) {
         }
     }
 
-    // account for the pivot element, which is at index 0 and
-    // not part of the "sorted" sub-slices
-    left += 1;
+    // the pivot position is the index of left in `rest` + 1 for the pivot element, which 
+    // was not part of rest
+    let mut pivot_position = left + 1;
 
-    // place the pivot at the correct position
-    if slice[left] <= slice[0] {
-        slice.swap(left, 0);
-    } else if left != 1 {
-        slice.swap(left - 1, 0);
+    // if the element at pivot_position is greater then the pivot, the pivot should go before it
+    pivot_position -= (slice[left] > slice[0]) as usize;
+
+    // if the pivot_position is now 0, we don't have to swap
+    if pivot_position != 0 {
+        slice.swap(pivot_position, 0);
     }
 
     quick_sort(&mut slice[..left]);
