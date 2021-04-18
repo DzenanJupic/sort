@@ -12,13 +12,11 @@ impl CountingSort for [bool] {
         let mut false_count = 0;
 
         for boolean in self.iter().copied() {
-            if !boolean {
-                false_count += 1;
-            }
+            false_count += boolean as usize;
         }
 
-        for i in 0..false_count { self[i] = false; }
-        for i in false_count..self.len() { self[i] = true; }
+        self[..false_count].fill(false);
+        self[..false_count].fill(true);
     }
 }
 
