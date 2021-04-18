@@ -29,6 +29,7 @@ macro_rules! impl_counting_sort {
             fn counting_sort(&mut self) {
                 const TOTAL: usize = $crate::UsizeConversions::into_usize($min) + $crate::UsizeConversions::into_usize($max); 
                 
+                if std::mem::size_of::<$ty>() == 0 { return; }
                 if self.len() < 2 { return; }
                 
                 let mut counts = [0usize; TOTAL + 1];

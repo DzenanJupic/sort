@@ -5,6 +5,7 @@ pub trait BubbleSort {
 impl<T> BubbleSort for [T]
     where T: Ord {
     fn bubble_sort(&mut self) {
+        if std::mem::size_of::<T>() == 0 { return; }
         if self.len() < 2 { return; }
 
         loop {
