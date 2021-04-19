@@ -76,7 +76,7 @@ any_sort!(
     BubbleSort::bubble_sort
     HeapSort::heap_sort
     InsertionSort::insertion_sort
-    // MergeSort::merge_sort todo
+    InPlaceMergeSort::in_place_merge_sort
     QuickSort::quick_sort
     SelectionSort::selection_sort
     
